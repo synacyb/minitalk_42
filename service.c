@@ -2,20 +2,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "ft_printf/ft_printf.h"
 
-void signal_handler(int sig) 
+void signal_handler(int sig)
 {
-    // Decode the signal and reconstruct the string
+	static int bits[8];
+	static int i = 0;
+	int j;
+	char c;
+
+	if (sig == SIGUSR1)
+		bits[i] = 1; // SIGUSR1 = 1
+	else
+		bits[i] = 0; // SIGUSR2 = 0
+
+	i++;
+
+	if (i == 8) // When we receive 8 bits, convert to char
+	{
+		c = 0;
+		j = 0;
+		while (j < 8)
+		{
+			c = (c << 1) | bits[j]; // Shift left and add bit
+			j++;
+		}
+		write(1, &c, 1); // Print character
+		i = 0; // Reset for next char
+	}
 }
 
 int main()
 {
-    ft_printf("Server PID: %d\n", getpid());
-    signal(SIGUSR1, signal_handler);
-    signal(SIGUSR2, signal_handler);
-    while (1) {
-        pause();
-    }
+    int get = getpid();
+    printf("Server PID: %d\n", get);
+
+    struct sigaction sa;
+    sa.sa_handler = signal_handler;
+    sa.sa_flags = SA_RESTART;
+    sigemptyset(&sa.sa_mask);
+
+    sigaction(SIGUSR1, &sa, NULL);
+    sigaction(SIGUSR2, &sa, NULL);
+
+    while (1)
+        pause(); // Wait for signals
+
     return 0;
 }

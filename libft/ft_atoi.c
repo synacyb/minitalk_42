@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:30:45 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/07 09:54:48 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:35:32 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int	ft_atoi(const char *nptr)
 	{
 		r = r * 10 + (*nptr - 48);
 		if (r > 2147483647 || r < -2147483648)
-			desiplay_error;
+			desiplay_error();
 		nptr++;
 	}
 	if (*nptr)
-		desiplay_error;
+		desiplay_error();
 	r = r * signe;
 	return (r);
 }
