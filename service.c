@@ -11,41 +11,37 @@ void signal_handler(int sig)
 	char c;
 
 	if (sig == SIGUSR1)
-		bits[i] = 1; // SIGUSR1 = 1
+		bits[i] = 1;
 	else
-		bits[i] = 0; // SIGUSR2 = 0
+		bits[i] = 0;
 
 	i++;
-
-	if (i == 8) // When we receive 8 bits, convert to char
+	if (i == 8)
 	{
-		c = 0;
-		j = 0;
-		while (j < 8)
-		{
-			c = (c << 1) | bits[j]; // Shift left and add bit
-			j++;
-		}
-		write(1, &c, 1); // Print character
-		i = 0; // Reset for next char
+		int r = 0;
+		int i = 0;
+		int res;
+		while (i < 8)
+			r = r * 2 + bits[i++];
+		char c;
+		c = (char)r;
+		write(1, &c, 1);
 	}
 }
 
-int main()
+int main(int ac, char **av)
 {
-    int get = getpid();
-    printf("Server PID: %d\n", get);
+	(void)av;
+	if (ac == 1)
+	{
+		int get = getpid();
+		printf("Server PID: %d\n", get);
 
-    struct sigaction sa;
-    sa.sa_handler = signal_handler;
-    sa.sa_flags = SA_RESTART;
-    sigemptyset(&sa.sa_mask);
+		signal(SIGUSR1, signal_handler);
+		signal(SIGUSR2, signal_handler);
 
-    sigaction(SIGUSR1, &sa, NULL);
-    sigaction(SIGUSR2, &sa, NULL);
-
-    while (1)
-        pause(); // Wait for signals
-
+		while (1)
+			pause();
+	}
     return 0;
 }
