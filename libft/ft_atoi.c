@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:30:45 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/07 16:35:32 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:44:34 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	desiplay_error(void)
 	write(2, "Error\n", 6);
 	exit(1);
 }
+
 int	ft_atoi(const char *nptr)
 {
 	long	r;
