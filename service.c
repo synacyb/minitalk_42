@@ -5,10 +5,8 @@
 
 void signal_handler(int sig)
 {
-	static int bits[8];
-	static int i = 0;
-	int j;
-	char c;
+	static int	bits[8] = {0};
+	static int	i = 0;
 
 	if (sig == SIGUSR1)
 		bits[i] = 1;
@@ -19,13 +17,16 @@ void signal_handler(int sig)
 	if (i == 8)
 	{
 		int r = 0;
-		int i = 0;
-		int res;
-		while (i < 8)
-			r = r * 2 + bits[i++];
+		int j = 0;
 		char c;
+
+		while (j < 8)
+			r = r * 2 + bits[j++];
+
 		c = (char)r;
 		write(1, &c, 1);
+		
+		i = 0;
 	}
 }
 
@@ -43,5 +44,6 @@ int main(int ac, char **av)
 		while (1)
 			pause();
 	}
-    return 0;
+	return 0;
 }
+

@@ -21,7 +21,7 @@ void send_string(int server_pid, char *str)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(1000);
+			usleep(450);
 			j++;
 		}
 		free(bits);
