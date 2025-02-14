@@ -6,18 +6,36 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/10 11:52:33 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 10:25:01 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "minitalk.h"
 #include "ft_printf/ft_printf.h"
+#include "minitalk.h"
 
-void	signal_handler(int sig)
+int last_pid;
+
+void	reset_bits(int *arr)
+{
+	int	i;
+	i = 0;
+
+	while(i < 8)
+		arr[i++] = 0;
+}
+void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bits[8];
 	static int	i;
 	t_signal	data;
-
+	int		current_pid;
+	(void)context;
+	last_pid = info->si_pid;
+	if(last_pid != info->si_pid)
+	{
+		reset_bits(bits);
+		i = 0;
+		last_pid = info->si_pid;
+	}
 	if (sig == SIGUSR1)
 		bits[i] = 1;
 	else
@@ -29,7 +47,7 @@ void	signal_handler(int sig)
 		data.j = 0;
 		while (data.j < 8)
 			data.r = data.r * 2 + bits[data.j++];
-		data.c = (char)data.r;
+		data.c = (unsigned char)data.r;
 		write(1, &data.c, 1);
 		i = 0;
 	}
@@ -43,9 +61,15 @@ int	main(int ac, char **av)
 	if (ac == 1)
 	{
 		get = getpid();
+		struct sigaction sa;
+
 		ft_printf("Server PID: %d\n", get);
-		signal(SIGUSR1, signal_handler);
-		signal(SIGUSR2, signal_handler);
+   		sa.sa_sigaction = signal_handler;
+    		sa.sa_flags = SA_SIGINFO;
+    		sigemptyset(&sa.sa_mask);
+
+    		sigaction(SIGUSR1, &sa, NULL);
+   	 	sigaction(SIGUSR2, &sa, NULL);
 		while (1)
 			pause();
 	}
