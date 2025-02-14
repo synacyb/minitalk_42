@@ -6,13 +6,11 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/14 10:25:01 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:36:29 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf/ft_printf.h"
 #include "minitalk.h"
-
-int last_pid;
 
 void	reset_bits(int *arr)
 {
@@ -28,8 +26,9 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	static int	i;
 	t_signal	data;
 	int		current_pid;
+	static int	last_pid;
 	(void)context;
-	last_pid = info->si_pid;
+	current_pid = info->si_pid;
 	if(last_pid != info->si_pid)
 	{
 		reset_bits(bits);
@@ -50,6 +49,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		data.c = (unsigned char)data.r;
 		write(1, &data.c, 1);
 		i = 0;
+		reset_bits(bits);
 	}
 }
 
@@ -70,8 +70,7 @@ int	main(int ac, char **av)
 
     		sigaction(SIGUSR1, &sa, NULL);
    	 	sigaction(SIGUSR2, &sa, NULL);
-		while (1)
-			pause();
+		while (1);
 	}
 	return (0);
 }

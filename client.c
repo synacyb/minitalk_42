@@ -6,7 +6,7 @@
 /*   By: ayadouay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:34:03 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/10 11:39:57 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:40:34 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	send_string(int server_pid, char *str)
 				kill(server_pid, SIGUSR1);
 			else
 				kill(server_pid, SIGUSR2);
-			usleep(450);
 			j++;
+			usleep(30);
 		}
 		free(bits);
 		i++;
