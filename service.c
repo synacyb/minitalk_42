@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/14 11:54:11 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:27:03 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf/ft_printf.h"
@@ -15,21 +15,38 @@
 void	reset_bits(int *arr)
 {
 	int	i;
-	i = 0;
 
-	while(i < 8)
+	i = 0;
+	while (i < 8)
 		arr[i++] = 0;
 }
+
+void	fornorm(int i, t_signal *data, int *bits)
+{
+	if (i == 8)
+	{
+		data->r = 0;
+		data->j = 0;
+		while (data->j < 8)
+			data->r = data->r * 2 + bits[data->j++];
+		data->c = (unsigned char)data->r;
+		write(1, &data->c, 1);
+		i = 0;
+		reset_bits(bits);
+	}
+}
+
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bits[8];
 	static int	i;
 	t_signal	data;
-	int		current_pid;
+	int			current_pid;
 	static int	last_pid;
+
 	(void)context;
 	current_pid = info->si_pid;
-	if(last_pid != info->si_pid)
+	if (last_pid != info->si_pid)
 	{
 		reset_bits(bits);
 		i = 0;
@@ -40,17 +57,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	else
 		bits[i] = 0;
 	i++;
-	if (i == 8)
-	{
-		data.r = 0;
-		data.j = 0;
-		while (data.j < 8)
-			data.r = data.r * 2 + bits[data.j++];
-		data.c = (unsigned char)data.r;
-		write(1, &data.c, 1);
-		i = 0;
-		reset_bits(bits);
-	}
+	fornorm(i, &data, bits);
 }
 
 int	main(int ac, char **av)
