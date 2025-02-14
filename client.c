@@ -6,7 +6,7 @@
 /*   By: ayadouay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:34:03 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/14 11:40:34 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:02:34 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	send_string(int server_pid, char *str)
 			else
 				kill(server_pid, SIGUSR2);
 			j++;
-			usleep(30);
+			usleep(100);
 		}
 		free(bits);
 		i++;
@@ -50,6 +50,8 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
+		if(pid < 0)
+			exit(1);
 		send_string(pid, av[2]);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/14 11:36:29 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:54:11 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf/ft_printf.h"
@@ -66,8 +66,6 @@ int	main(int ac, char **av)
 		ft_printf("Server PID: %d\n", get);
    		sa.sa_sigaction = signal_handler;
     		sa.sa_flags = SA_SIGINFO;
-    		sigemptyset(&sa.sa_mask);
-
     		sigaction(SIGUSR1, &sa, NULL);
    	 	sigaction(SIGUSR2, &sa, NULL);
 		while (1);
