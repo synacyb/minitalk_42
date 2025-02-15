@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
+#include "minitalk.h"
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft/libft.h"
-#include "minitalk.h"
 
 void	send_string(int server_pid, char *str)
 {
@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
-		if(pid < 0)
+		if (pid < 0)
 			exit(1);
 		send_string(pid, av[2]);
 	}

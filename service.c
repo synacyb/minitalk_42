@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/14 18:27:03 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:15:02 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf/ft_printf.h"
@@ -62,20 +62,20 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 
 int	main(int ac, char **av)
 {
-	int	get;
+	struct sigaction	sa;
+	pid_t				get;
 
 	(void)av;
 	if (ac == 1)
 	{
 		get = getpid();
-		struct sigaction sa;
-
 		ft_printf("Server PID: %d\n", get);
-   		sa.sa_sigaction = signal_handler;
-    		sa.sa_flags = SA_SIGINFO;
-    		sigaction(SIGUSR1, &sa, NULL);
-   	 	sigaction(SIGUSR2, &sa, NULL);
-		while (1);
+		sa.sa_sigaction = signal_handler;
+		sa.sa_flags = SA_SIGINFO;
+		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
+		while (1)
+			;
 	}
 	return (0);
 }

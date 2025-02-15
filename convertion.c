@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minitalk.h"
+#include <stdlib.h>
 
 int	*char_to_binary(unsigned char c)
 {
