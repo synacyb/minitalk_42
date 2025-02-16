@@ -41,11 +41,9 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	static int	bits[8];
 	static int	i;
 	t_signal	data;
-	int			current_pid;
 	static int	last_pid;
 
 	(void)context;
-	current_pid = info->si_pid;
 	if (last_pid != info->si_pid)
 	{
 		reset_bits(bits);
@@ -72,6 +70,7 @@ int	main(int ac, char **av)
 		ft_printf("Server PID: %d\n", get);
 		sa.sa_sigaction = signal_handler;
 		sa.sa_flags = SA_SIGINFO;
+		sigemptyset(&sa.sa_mask);
 		sigaction(SIGUSR1, &sa, NULL);
 		sigaction(SIGUSR2, &sa, NULL);
 		while (1)
