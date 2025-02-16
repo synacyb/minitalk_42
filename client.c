@@ -13,7 +13,6 @@
 #include "libft/libft.h"
 #include "minitalk.h"
 
-
 void	error_pid(int *bits)
 {
 	ft_putstr_fd("This PID Not found !", 1);
