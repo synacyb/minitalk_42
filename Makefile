@@ -44,4 +44,4 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-.SECONDARY: $(SERVER_OBJS) $(CLIENT_OBJS)
+# .SECONDARY: $(SERVER_OBJS) $(CLIENT_OBJS)

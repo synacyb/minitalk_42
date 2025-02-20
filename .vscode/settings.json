@@ -1,6 +1,3 @@
 {
-    "files.associations": {
-        "unistd.h": "c",
-        "minitalk.h": "c"
-    }
+    "makefile.configureOnOpen": true
 }

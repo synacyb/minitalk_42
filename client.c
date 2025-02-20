@@ -51,7 +51,7 @@ void	get_8_bits(int server_pid, char *str)
 	i = 0;
 	while (str[i])
 	{
-		bits = char_to_binary(str[i]);
+		bits = char_to_binary((unsigned char)str[i]);
 		if (!bits)
 			return ;
 		ft_send_bit(server_pid, bits);
