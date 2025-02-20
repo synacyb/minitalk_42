@@ -36,8 +36,6 @@ int	ft_atoi(const char *nptr)
 	while (*nptr != '\0' && (*nptr >= '0' && *nptr <= '9'))
 	{
 		r = r * 10 + (*nptr - 48);
-		if (r > 2147483647 || r < -2147483648)
-			desiplay_error();
 		nptr++;
 	}
 	if (*nptr)

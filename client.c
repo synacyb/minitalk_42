@@ -66,6 +66,10 @@ int	main(int ac, char **av)
 		get_8_bits(pid, av[2]);
 	}
 	else
+	{
+		ft_putstr_fd("Please provide exactly 2 arguments: <SERVER_PID> <MESSAGE>\n", 1);
 		exit(1);
+	}
+		
 	return (0);
 }

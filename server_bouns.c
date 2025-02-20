@@ -8,7 +8,7 @@ void	check_send_string(pid_t pid, char c)
 		write(1, "\n", 1);
 		if (kill(pid, SIGUSR2) == -1)
 		{
-			printf("PID NOT FOUND !\n");
+			ft_printf("Errore\n");
 			exit(1);
 		}
 	}
