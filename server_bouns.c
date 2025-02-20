@@ -1,6 +1,19 @@
 #include "ft_printf/ft_printf.h"
 #include "minitalk.h"
 
+void	check_send_string(pid_t pid, char c)
+{
+	if (c == '\0')
+	{
+		write(1, "\n", 1);
+		if (kill(pid, SIGUSR2) == -1)
+		{
+			printf("PID NOT FOUND !\n");
+			exit(1);
+		}
+	}
+}
+
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static char	c;
@@ -24,6 +37,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	if (i == 8)
 	{
 		write(1, &c, 1);
+		check_send_string(last_pid, c);
 		c = 0;
 		i = 0;
 	}

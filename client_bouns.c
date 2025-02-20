@@ -1,12 +1,20 @@
 #include "libft/libft.h"
 #include "minitalk.h"
 
+int	g_signal_received = 0;
+
 void	error_pid(void)
 {
 	ft_putstr_fd("This PID Not found !", 1);
 	exit(1);
 }
 
+void	print_msg(int sig)
+{
+	(void)sig;
+	g_signal_received = 1;
+	write(1, "The message was sent successfully.\n", 36);
+}
 void	ft_send_bit(int server_pid, unsigned char c)
 {
 	int	j;
@@ -39,6 +47,7 @@ void	get_8_bits(int server_pid, char *str)
 		ft_send_bit(server_pid, c);
 		i++;
 	}
+	ft_send_bit(server_pid, '\0');
 }
 
 int	main(int ac, char **av)
@@ -50,7 +59,9 @@ int	main(int ac, char **av)
 		pid = ft_atoi(av[1]);
 		if (pid < 0)
 			exit(1);
+		signal(SIGUSR2, print_msg);
 		get_8_bits(pid, av[2]);
+		while (!g_signal_received);
 	}
 	else
 		exit(1);

@@ -13,50 +13,45 @@
 #include "libft/libft.h"
 #include "minitalk.h"
 
-void	error_pid(int *bits)
+void	error_pid(void)
 {
 	ft_putstr_fd("This PID Not found !", 1);
-	free(bits);
 	exit(1);
 }
 
-void	ft_send_bit(int server_pid, int *bits)
+void	ft_send_bit(int server_pid, unsigned char c)
 {
 	int	j;
 
-	j = 0;
-	while (j < 8)
+	j = 8;
+	while (j--)
 	{
-		if (bits[j] == 1)
-		{
-			if (kill(server_pid, SIGUSR1) == -1)
-				error_pid(bits);
-		}
-		else
-		{
-			if (kill(server_pid, SIGUSR2) == -1)
-				error_pid(bits);
-		}
-		j++;
+        if ((c >> j) & 1)
+        {
+            if (kill(server_pid, SIGUSR1) == -1)
+				error_pid();
+        }
+        else
+        {
+            if (kill(server_pid, SIGUSR2) == -1)
+				error_pid();
+        }
 		usleep(100);
 	}
-	free(bits);
 }
 
 void	get_8_bits(int server_pid, char *str)
 {
-	int	*bits;
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		bits = char_to_binary((unsigned char)str[i]);
-		if (!bits)
-			return ;
-		ft_send_bit(server_pid, bits);
+        unsigned char c = (unsigned char)str[i];
+		ft_send_bit(server_pid, c);
 		i++;
 	}
+	ft_send_bit(server_pid, '\n');
 }
 
 int	main(int ac, char **av)
