@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayadouay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:34:03 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/16 10:24:19 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/21 09:36:14 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,29 @@ void	ft_send_bit(int server_pid, unsigned char c)
 	j = 8;
 	while (j--)
 	{
-        if ((c >> j) & 1)
-        {
-            if (kill(server_pid, SIGUSR1) == -1)
+		if ((c >> j) & 1)
+		{
+			if (kill(server_pid, SIGUSR1) == -1)
 				error_pid();
-        }
-        else
-        {
-            if (kill(server_pid, SIGUSR2) == -1)
+		}
+		else
+		{
+			if (kill(server_pid, SIGUSR2) == -1)
 				error_pid();
-        }
+		}
 		usleep(100);
 	}
 }
 
 void	get_8_bits(int server_pid, char *str)
 {
-	int	i;
+	int				i;
+	unsigned char	c;
 
 	i = 0;
 	while (str[i])
 	{
-        unsigned char c = (unsigned char)str[i];
+		c = (unsigned char)str[i];
 		ft_send_bit(server_pid, c);
 		i++;
 	}
@@ -67,9 +68,8 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		ft_putstr_fd("Please provide exactly 2 arguments: <SERVER_PID> <MESSAGE>\n", 1);
+		ft_putstr_fd("Please provide exactly 2 arguments!\n", 1);
 		exit(1);
 	}
-		
 	return (0);
 }

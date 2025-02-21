@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_bouns.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 09:28:26 by ayadouay          #+#    #+#             */
+/*   Updated: 2025/02/21 09:34:27 by ayadouay         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf/ft_printf.h"
 #include "minitalk.h"
 
@@ -33,7 +45,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	}
 	else
 		c = c << 1;
-	i++; 
+	i++;
 	if (i == 8)
 	{
 		write(1, &c, 1);
@@ -59,7 +71,7 @@ int	main(int ac, char **av)
 		sigaction(SIGUSR1, &sa, NULL);
 		sigaction(SIGUSR2, &sa, NULL);
 		while (1)
-		{}
+			;
 	}
 	return (0);
 }
