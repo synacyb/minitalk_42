@@ -1,6 +1,8 @@
 {
     "makefile.configureOnOpen": true,
     "files.associations": {
-        "libft.h": "c"
+        "libft.h": "c",
+        "minitalk.h": "c",
+        "ft_printf.h": "c"
     }
 }

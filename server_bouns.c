@@ -6,10 +6,9 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 09:28:26 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/21 09:34:27 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:41:54 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf/ft_printf.h"
 #include "minitalk.h"
 

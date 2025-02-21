@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ayadouay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 11:17:02 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/21 09:36:46 by ayadouay         ###   ########.fr       */
+/*   Created: 2025/02/21 11:44:32 by ayadouay          #+#    #+#             */
+/*   Updated: 2025/02/21 11:44:51 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include "ft_printf/ft_printf.h"
 
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
