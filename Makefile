@@ -19,8 +19,8 @@ SERVER_BOBJS = $(SERVER_BSRC:.c=.o)
 CLIENT = client
 SERVER = server
 
-CLIENT_BNS = client_bns
-SERVER_BNS = server_bns
+CLIENT_BNS = client_bonus
+SERVER_BNS = server_bonus
 
 DELETE = rm -f
 

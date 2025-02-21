@@ -6,7 +6,7 @@
 /*   By: ayadouay <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 09:31:11 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/21 13:05:54 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:26:32 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 // strcut for atoi
 typedef struct ft_atoi
 {
-    long	r;
-    int		signe;
-    int		len;
+	long	r;
+	int		signe;
+	int		len;
 }	t_atoi;
 // all prototypes
 

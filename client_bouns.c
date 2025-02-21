@@ -6,7 +6,7 @@
 /*   By: ayadouay <ayadouay@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 09:22:16 by ayadouay          #+#    #+#             */
-/*   Updated: 2025/02/21 13:23:00 by ayadouay         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:22:22 by ayadouay         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int ac, char **av)
 	if (ac == 3)
 	{
 		pid = ft_atoi(av[1]);
-		if (pid < 0 || pid > 4194304)
+		if (pid <= 0 || pid > 4194304)
 		{
 			ft_putstr_fd("The provided PID is outside the valid range!\n", 1);
 			exit(1);
